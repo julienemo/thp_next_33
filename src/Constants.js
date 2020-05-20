@@ -1,7 +1,6 @@
 export const ConjuredProductPrefixRegEx = /^conjured\b/;
 export const ConstantProductKeyWords = ["sulfuras"];
-export const FlexProductKeyWords = [/\bbackstage passes\b/];
-export const AgingProductKeyWords = ["aged"];
+export const AgingProductKeyWords = [/\baged\b/, /\bbackstage passes\b/];
 
 export const NormalReduceRateBeforeSellIn = 1;
 export const AgingProductIncreaseRate = 1;

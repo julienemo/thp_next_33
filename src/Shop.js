@@ -15,26 +15,22 @@ class Shop {
   }
 
   updateSingleProductQuality(product) {
-    let name = product.name.toLowerCase();
+    let name = product.name.toLowerCase().replace(/[^-_,A-Za-z0-9\s]/gi, "");
     if (ConjuredProductPrefixRegEx.test(name)) {
       this.qualityUpdater.updateConjuredProduct(product);
     } else if (
       ConstantProductKeyWords.some((word) => name.split(" ").includes(word))
     ) {
       this.qualityUpdater.updateConstantProduct(product);
-    } else if (
-      AgingProductKeyWords.some((word) => name.split(" ").includes(word))
-    ) {
+    } else if (AgingProductKeyWords.some((word) => word.test(name))) {
       this.qualityUpdater.updateAgingProduct(product);
-    } else if (FlexProductKeyWords.some((word) => word.test(name))) {
-      this.qualityUpdater.updateFlexProduct(product);
     } else {
       this.qualityUpdater.updateNormalProduct(product);
     }
   }
 
   updateSingleProductSellIn(product) {
-    let name = product.name.toLowerCase();
+    let name = product.name.toLowerCase().replace(/[^-_,A-Za-z0-9\s]/gi, "");
     if (
       ConstantProductKeyWords.some((word) => name.split(" ").includes(word))
     ) {

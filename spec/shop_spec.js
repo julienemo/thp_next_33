@@ -104,25 +104,6 @@ describe("GildedRose shop manager", () => {
     });
   });
 
-  it("For Aged Brie, reduces sellIn by ONE, raises the quality by one, but never higher than 50", () => {
-    listItems.push(new Item("Aged Brie", 20, 30));
-    listItems.push(new Item("Aged Brie", 20, 49));
-
-    const gildedRose = new Shop(listItems);
-    const items = gildedRose.updateItems();
-    const gildedRoseDay2 = new Shop(items);
-    const itemsDay2 = gildedRoseDay2.updateItems();
-
-    const expected = [
-      { sellIn: 18, quality: 32 },
-      { sellIn: 18, quality: 50 },
-    ];
-    expected.forEach((testCase, idx) => {
-      expect(itemsDay2[idx].quality).toBe(testCase.quality);
-      expect(itemsDay2[idx].sellIn).toBe(testCase.sellIn);
-    });
-  });
-
   it("For Sulfuras, doesn't change sellIn, keeps quality at 80", () => {
     listItems.push(new Item("Sulfuras Hand of Ragnaros", 3, 77));
 
@@ -146,9 +127,9 @@ describe("GildedRose shop manager", () => {
     });
   });
 
-  it("For backstage passes with sellIn > 10, sellIn reduces by ONE and quality raises by ONE, but never over 50", () => {
+  it("For aging products as ages brie or concert tickets with sellIn > 10, sellIn reduces by ONE and quality raises by ONE, but never over 50", () => {
     listItems.push(new Item("Backstage passes concert1", 20, 30));
-    listItems.push(new Item("Backstage passes concert2", 20, 50));
+    listItems.push(new Item("Aged Brie", 20, 50));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateItems();
@@ -176,9 +157,9 @@ describe("GildedRose shop manager", () => {
     });
   });
 
-  it("For backstage passes with sellIn <= 10 > 5 , sellIn reduces by ONE and quality raises by TWO, but never over 50", () => {
+  it("For aging products as ages brie or concert tickets with sellIn <= 10 > 5 , sellIn reduces by ONE and quality raises by TWO, but never over 50", () => {
     listItems.push(new Item("Backstage passes concert3", 9, 30));
-    listItems.push(new Item("Backstage passes concert4", 9, 50));
+    listItems.push(new Item("Aged Brie", 9, 50));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateItems();
@@ -206,9 +187,9 @@ describe("GildedRose shop manager", () => {
     });
   });
 
-  it("For backstage passes with sellIn <= 5 > 0 , sellIn reduces by ONE and quality raises by THREE, but never over 50", () => {
+  it("For aging products as ages brie or concert tickets with sellIn <= 5 > 0 , sellIn reduces by ONE and quality raises by THREE, but never over 50", () => {
     listItems.push(new Item("Backstage passes concert3", 4, 30));
-    listItems.push(new Item("Backstage passes concert4", 4, 48));
+    listItems.push(new Item("Aged Brie", 4, 48));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateItems();
@@ -236,9 +217,9 @@ describe("GildedRose shop manager", () => {
     });
   });
 
-  it("For backstage passes after sellIn, sellIn reduces by ONE and quality becomes ZERO and never drops below", () => {
+  it("For aging products as ages brie or concert tickets after sellIn, sellIn reduces by ONE and quality becomes ZERO and never drops below", () => {
     listItems.push(new Item("Backstage passes concert3", 0, 30));
-    listItems.push(new Item("Backstage passes concert4", 0, 48));
+    listItems.push(new Item("Aged Brie", 0, 48));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateItems();
