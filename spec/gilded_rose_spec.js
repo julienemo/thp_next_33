@@ -1,4 +1,4 @@
-var { Shop, Item } = require('../src/gilded_rose.js');
+var { Shop, Item } = require("../src/gilded_rose.js");
 describe("GildedRose shop manager", function () {
   var listItems;
 
@@ -6,8 +6,7 @@ describe("GildedRose shop manager", function () {
     listItems = [];
   });
 
-
-  it("Baisser de 1 la qualité et sellIn d'item normaux", function () {
+  it("Reduces the sellIn and quality of a normal product by ONE", function () {
     listItems.push(new Item("+5 Dexterity Vest", 10, 20));
     listItems.push(new Item("Mana Cake", 3, 6));
 
@@ -16,7 +15,7 @@ describe("GildedRose shop manager", function () {
 
     var expected = [
       { sellIn: 9, quality: 19 },
-      { sellIn: 2, quality: 5 }
+      { sellIn: 2, quality: 5 },
     ];
     expected.forEach(function (testCase, idx) {
       expect(items[idx].quality).toBe(testCase.quality);
@@ -24,9 +23,11 @@ describe("GildedRose shop manager", function () {
     });
   });
 
-  it("Augmenter la qualité de 1 pour Aged Brie et Backstage passes", function () {
+  it("Raises, for Aged Brie and Backstage passes, the quality by one", function () {
     listItems.push(new Item("Aged Brie", 20, 30));
-    listItems.push(new Item("Backstage passes to a TAFKAL80ETC concert", 20, 30));
+    listItems.push(
+      new Item("Backstage passes to a TAFKAL80ETC concert", 20, 30)
+    );
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateQuality();
