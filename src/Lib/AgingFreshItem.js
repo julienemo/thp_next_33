@@ -14,16 +14,16 @@ class AgingFreshItem extends Item {
     this.sellInDecreaseRate = -1;
   }
 
-  qualityRangeControl() {
+  qualityRangeControl = () => {
     if (this.quality > this.maxQuality) {
       this.quality = this.maxQuality;
     }
     if (this.quality < this.minQuality) {
       this.quality = this.minQuality;
     }
-  }
+  };
 
-  update() {
+  update = () => {
     this.sellIn += this.sellInDecreaseRate;
     this.qualityRangeControl();
     if (this.sellIn > this.thresholdSellIn1) {
@@ -36,7 +36,7 @@ class AgingFreshItem extends Item {
       this.quality = this.minQuality;
     }
     this.qualityRangeControl();
-  }
+  };
 }
 
 export default AgingFreshItem;

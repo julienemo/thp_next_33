@@ -7,9 +7,9 @@ class LegendaryItem extends Item {
     this.quality = 80;
   }
 
-  update() {
+  update = () => {
     return;
-  }
+  };
 }
 
 export default LegendaryItem;

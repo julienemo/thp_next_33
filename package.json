@@ -39,5 +39,7 @@
     ],
     "plugins": []
   },
-  "dependencies": {}
+  "dependencies": {
+    "jasmine-es6": "^0.4.3"
+  }
 }

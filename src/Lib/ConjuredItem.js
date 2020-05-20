@@ -11,16 +11,16 @@ class ConjuredItem extends Item {
     this.thresholdSellIn = 0;
   }
 
-  qualityRangeControl() {
+  qualityRangeControl = () => {
     if (this.quality > this.maxQuality) {
       this.quality = this.maxQuality;
     }
     if (this.quality < this.minQuality) {
       this.quality = this.minQuality;
     }
-  }
+  };
 
-  update() {
+  update = () => {
     this.sellIn += this.sellInDecreaseRate;
     this.qualityRangeControl();
     if (this.sellIn > this.thresholdSellIn) {
@@ -29,7 +29,7 @@ class ConjuredItem extends Item {
       this.quality += this.afterSellInQualityChangeRate;
     }
     this.qualityRangeControl();
-  }
+  };
 }
 
 export default ConjuredItem;

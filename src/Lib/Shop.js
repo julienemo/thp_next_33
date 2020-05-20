@@ -3,13 +3,10 @@ class Shop {
     this.items = items;
   }
 
-  updateItems() {
-    let list = this.items;
-    list.forEach((item) => {
-      item.update();
-    });
-    return list;
-  }
+  updateItems = () => {
+    this.items.map((item) => item.update());
+    return this.items;
+  };
 }
 
 export default Shop;
