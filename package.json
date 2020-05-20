@@ -40,6 +40,7 @@
     "plugins": []
   },
   "dependencies": {
+    "braces": "^2.3.2",
     "jasmine-es6": "^0.4.3"
   }
 }

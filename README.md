@@ -22,7 +22,7 @@ To see results
 
 **Attention**
 
-The category determining the update logic of a product depends totally on which sub-class the product is declared in. Name is not a criteria. Ex, a "conjured duck" declared as LegendaryItem will no depreciate.
+The category determining the update logic of a product depends totally on which sub-class the product is declared in. Name is not a criteria. Ex, a "conjured duck" declared as LegendaryItem will not depreciate.
 
 I would very much like to let the program to decide "automatically" on the category with regEx, but it seems to violate the open-closed principle.
 
