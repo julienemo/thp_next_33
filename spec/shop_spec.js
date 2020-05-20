@@ -1,4 +1,5 @@
-var { Shop, Item } = require("../src/gilded_rose.js");
+var { Item } = require("../src/Item.js");
+var { Shop } = require("../src/Shop.js");
 
 const normalProductBeforeSellin1 = new Item("+5 Dexterity Vest", 10, 20);
 const normalProductBeforeSellin2 = new Item("Mana Cake", 2, 6);
