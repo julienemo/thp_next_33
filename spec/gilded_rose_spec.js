@@ -1,16 +1,21 @@
-import Item from "../src/Item";
-import Shop from "../src/Shop";
+const {
+  NormalItem,
+  ConjuredItem,
+  LegendaryItem,
+  AgingFreshItem,
+  Shop,
+} = require("../src/GildedRose.js");
 
 describe("GildedRose shop manager", () => {
-  var listItems;
+  let listItems;
 
   beforeEach(() => {
     listItems = [];
   });
 
   it("For a normal product before sellIn, reduces the sellIn and quality of a normal product by ONE", () => {
-    listItems.push(new Item("+5 Dexterity Vest", 10, 20));
-    listItems.push(new Item("Mana Cake", 2, 6));
+    listItems.push(new NormalItem("+5 Dexterity Vest", 10, 20));
+    listItems.push(new NormalItem("Mana Cake", 2, 6));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateItems();
@@ -27,8 +32,8 @@ describe("GildedRose shop manager", () => {
   });
 
   it("For a conjured product before sellIn, reduces the sellIn by ONE and quality by TWO", () => {
-    listItems.push(new Item("Conjured Vest", 10, 20));
-    listItems.push(new Item("Conjured Cake", 2, 6));
+    listItems.push(new ConjuredItem("Conjured Vest", 10, 20));
+    listItems.push(new ConjuredItem("Conjured Cake", 2, 6));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateItems();
@@ -45,8 +50,8 @@ describe("GildedRose shop manager", () => {
   });
 
   it("For a normal product after sellIn, reduces the sellIn by ONE and quality by TWO of a normal product by ONE", () => {
-    listItems.push(new Item("+5 Dexterity Vest", -1, 20));
-    listItems.push(new Item("Mana Cake", -2, 6));
+    listItems.push(new NormalItem("+5 Dexterity Vest", -1, 20));
+    listItems.push(new NormalItem("Mana Cake", -2, 6));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateItems();
@@ -63,8 +68,8 @@ describe("GildedRose shop manager", () => {
   });
 
   it("For a conjured product after sellIn, reduces the sellIn by ONE and quality by FOUR", () => {
-    listItems.push(new Item("Conjured Vest", -1, 20));
-    listItems.push(new Item("Conjured Cake", -2, 6));
+    listItems.push(new ConjuredItem("Conjured Vest", -1, 20));
+    listItems.push(new ConjuredItem("Conjured Cake", -2, 6));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateItems();
@@ -80,11 +85,11 @@ describe("GildedRose shop manager", () => {
     });
   });
 
-  it("For normal and conjured product, quality doesn't drop to negative", () => {
-    listItems.push(new Item("+5 Dexterity Vest", -1, 2));
-    listItems.push(new Item("Mana Cake", 3, 1));
-    listItems.push(new Item("Conjured Vest", -1, 2));
-    listItems.push(new Item("Conjured Cake", 3, 1));
+  it("For a normal or conjured product, quality doesn't drop to negative", () => {
+    listItems.push(new NormalItem("+5 Dexterity Vest", -1, 2));
+    listItems.push(new NormalItem("Mana Cake", 3, 1));
+    listItems.push(new ConjuredItem("Conjured Vest", -1, 2));
+    listItems.push(new ConjuredItem("Conjured Cake", 3, 1));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateItems();
@@ -104,8 +109,8 @@ describe("GildedRose shop manager", () => {
     });
   });
 
-  it("For Sulfuras, doesn't change sellIn, keeps quality at 80", () => {
-    listItems.push(new Item("Sulfuras Hand of Ragnaros", 3, 77));
+  it("For a legendary product, doesn't change sellIn, keeps quality at 80", () => {
+    listItems.push(new LegendaryItem("Sulfuras Hand of Ragnaros", 3, 77));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateItems();
@@ -127,9 +132,9 @@ describe("GildedRose shop manager", () => {
     });
   });
 
-  it("For aging products as ages brie or concert tickets with sellIn > 10, sellIn reduces by ONE and quality raises by ONE, but never over 50", () => {
-    listItems.push(new Item("Backstage passes concert1", 20, 30));
-    listItems.push(new Item("Aged Brie", 20, 50));
+  it("For volatile products with sellIn > 10, sellIn reduces by ONE and quality raises by ONE, but never over 50", () => {
+    listItems.push(new AgingFreshItem("Backstage passes concert1", 20, 30));
+    listItems.push(new AgingFreshItem("Aged Brie", 20, 50));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateItems();
@@ -157,9 +162,9 @@ describe("GildedRose shop manager", () => {
     });
   });
 
-  it("For aging products as ages brie or concert tickets with sellIn <= 10 > 5 , sellIn reduces by ONE and quality raises by TWO, but never over 50", () => {
-    listItems.push(new Item("Backstage passes concert3", 9, 30));
-    listItems.push(new Item("Aged Brie", 9, 50));
+  it("For volatile products with sellIn <= 10 > 5 , sellIn reduces by ONE and quality raises by TWO, but never over 50", () => {
+    listItems.push(new AgingFreshItem("Backstage passes concert3", 9, 30));
+    listItems.push(new AgingFreshItem("Aged Brie", 9, 50));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateItems();
@@ -187,9 +192,9 @@ describe("GildedRose shop manager", () => {
     });
   });
 
-  it("For aging products as ages brie or concert tickets with sellIn <= 5 > 0 , sellIn reduces by ONE and quality raises by THREE, but never over 50", () => {
-    listItems.push(new Item("Backstage passes concert3", 4, 30));
-    listItems.push(new Item("Aged Brie", 4, 48));
+  it("For volatile products with sellIn <= 5 > 0 , sellIn reduces by ONE and quality raises by THREE, but never over 50", () => {
+    listItems.push(new AgingFreshItem("Backstage passes concert3", 4, 30));
+    listItems.push(new AgingFreshItem("Aged Brie", 4, 48));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateItems();
@@ -217,9 +222,9 @@ describe("GildedRose shop manager", () => {
     });
   });
 
-  it("For aging products as ages brie or concert tickets after sellIn, sellIn reduces by ONE and quality becomes ZERO and never drops below", () => {
-    listItems.push(new Item("Backstage passes concert3", 0, 30));
-    listItems.push(new Item("Aged Brie", 0, 48));
+  it("For volatile products after sellIn, sellIn reduces by ONE and quality becomes ZERO and never drops below", () => {
+    listItems.push(new AgingFreshItem("Backstage passes concert3", 0, 30));
+    listItems.push(new AgingFreshItem("Aged Brie", 0, 48));
 
     const gildedRose = new Shop(listItems);
     const items = gildedRose.updateItems();
